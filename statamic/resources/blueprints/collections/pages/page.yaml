@@ -1,0 +1,84 @@
+title: Page
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: content
+            field:
+              type: markdown
+              display: Content
+              localizable: true
+          -
+            handle: author
+            field:
+              type: users
+              display: Author
+              default: current
+              localizable: true
+              max_items: 1
+          -
+            handle: template
+            field:
+              type: template
+              display: Template
+              localizable: true
+          -
+            handle: image_1
+            field:
+              max_files: 1
+              min_files: 1
+              container: assets
+              type: assets
+              display: 'Image 1'
+              validate:
+                - image
+          -
+            handle: image_2
+            field:
+              container: assets
+              type: assets
+              display: 'Image 2'
+              validate:
+                - image
+              max_files: 1
+              min_files: 1
+          -
+            handle: image_3
+            field:
+              container: assets
+              type: assets
+              display: 'Image 3'
+              validate:
+                - image
+              max_files: 1
+              min_files: 1
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true

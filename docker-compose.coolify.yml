@@ -1,0 +1,22 @@
+# from https://hub.docker.com/r/shinsenter/statamic
+# inherits from https://hub.docker.com/r/shinsenter/php
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.coolify
+    ports:
+    # App runs on port 80, SSL handled by Traelik via Coolify
+      - '${APP_PORT:-80}:80'
+    labels:
+      # plexra/plexralimited basic auth for dev site:
+      # - 'traefik.http.middlewares.plexra-devsite-auth.basicauth.users=plexra:$2y$05$BngcHUJuzSlWwftLYfOZle1v4tWB4k/as8Ioyo/JoYHU6yoNBFr9S'
+    volumes:
+      # Application:
+      - ./statamic:/var/www/html
+      # nginx.conf (override))
+      - ./nginx.prod.conf:/etc/nginx/nginx.conf
+      # Entrypoint script is where the frontend is built (npm ci, npm run build etc) before starting nginx:
+      - ./docker-entrypoint.prod.sh:/usr/local/bin/entrypoint.sh
+    entrypoint: ["/usr/local/bin/entrypoint.sh"]
+    command: ["docker-php-entrypoint"]

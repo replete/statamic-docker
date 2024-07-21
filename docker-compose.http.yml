@@ -1,0 +1,13 @@
+# from https://hub.docker.com/r/shinsenter/statamic
+# inherits from https://hub.docker.com/r/shinsenter/php
+# if volume folder is empty, it installs statamic there alongside deps
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '${DOCKER_PORT:-80}:${APP_PORT:-80}'
+    volumes:
+      # Application
+      - ./statamic:/var/www/html

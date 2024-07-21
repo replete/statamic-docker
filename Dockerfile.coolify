@@ -1,0 +1,12 @@
+FROM shinsenter/statamic:php8.3-alpine
+
+# Copy app into container, fixing permissions
+# COPY --chown=$APP_USER:$APP_GROUP ./statamic /var/www/html
+
+# Install npm for the frontend build step in entrypoint.sh
+RUN apk add --no-cache nodejs npm
+
+# Copy entrypoint script into the image and make it executable
+# This file runs npm commands to build the frontend assets
+COPY ./docker-entrypoint.prod.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh

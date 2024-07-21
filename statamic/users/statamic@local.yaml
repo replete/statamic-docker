@@ -1,0 +1,4 @@
+name: User
+super: true
+id: 98ee0c80-cc08-4078-bdbd-68896634d54c
+password_hash: $2y$12$O9syQYuxFxr5UfUm1.rbBOLGcG2y9JP0NxeeB84RrDplSdqqCCoai
